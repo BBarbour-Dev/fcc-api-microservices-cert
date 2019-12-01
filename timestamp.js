@@ -10,7 +10,7 @@ module.exports = function(req, res) {
 
   const date = new Date(date_string);
   const invalidDate = isNaN(date);
-  const unix = date.getTime();
+  const unix = date.valueOf();
   const utc = date.toUTCString();
 
   if (invalidDate) {

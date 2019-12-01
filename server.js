@@ -19,9 +19,15 @@ app.get("/", function(_req, res) {
 });
 
 // your first API endpoint...
-app.get("/api/hello", function(_req, res) {
+app.get("/api/hello", (_req, res) => {
   res.json({ greeting: "hello API" });
 });
+
+const timestamp = require("./timestamp");
+
+app.get("/api/timestamp", (req, res) => timestamp(req, res));
+
+app.get("/api/timestamp/:date_string", (req, res) => timestamp(req, res));
 
 // listen for requests :)
 const listener = app.listen(process.env.PORT || 5000, function() {

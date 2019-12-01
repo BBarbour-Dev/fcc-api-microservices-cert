@@ -4,16 +4,16 @@ module.exports = function(req, res) {
   const { date_string } = req.params;
 
   if (!date_string) {
-    const unix = moment().unix();
-    const utc = moment().utc();
+    const date = new Date();
+    const unix = date.getTime();
+    const utc = date.toUTCString();
     return res.status(200).json({ unix, utc });
   }
 
   const validDateString = moment(date_string).isValid();
-  const unix = moment(date_string).unix();
-  const utc = moment(date_string)
-    .utc()
-    .format("ddd, D MMM YYYY hh:m:ss z");
+  const date = new Date(date_string);
+  const unix = date.getTime();
+  const utc = date.toUTCString();
 
   if (!validDateString) {
     return res.status(400).json({ error: "Invalid Date" });

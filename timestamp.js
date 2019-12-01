@@ -1,4 +1,4 @@
-module.exports = function(req, res) {
+function handler(req, res) {
   const { date_string } = req.params;
 
   if (!date_string) {
@@ -8,14 +8,26 @@ module.exports = function(req, res) {
     return res.status(200).json({ unix, utc });
   }
 
-  const date = new Date(date_string);
-  const invalidDate = isNaN(date);
-  const unix = date.valueOf();
-  const utc = date.toUTCString();
+  const { validUnix, validString } = dateValidator(date_string);
 
-  if (invalidDate) {
-    return res.status(400).json({ error: "Invalid Date" });
+  if (!validUnix && !validString) {
+    console.log(date_string);
+    return res.status(200).json({ error: "Invalid Date" });
   }
 
-  return res.status(200).json({ unix, utc });
-};
+  const date = validString
+    ? new Date(date_string)
+    : new Date(parseInt(date_string));
+
+  const response = { unix: date.getTime(), utc: date.toUTCString() };
+
+  return res.status(200).json(response);
+}
+
+function dateValidator(date_string) {
+  const stringNaN = isNaN(new Date(date_string));
+  const unixNaN = isNaN(new Date(parseInt(date_string)));
+  return { validUnix: !unixNaN, validString: !stringNaN };
+}
+
+module.exports = handler;

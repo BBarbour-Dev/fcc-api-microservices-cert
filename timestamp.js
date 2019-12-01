@@ -11,7 +11,9 @@ module.exports = function(req, res) {
 
   const validDateString = moment(date_string).isValid();
   const unix = moment(date_string).unix();
-  const utc = moment(date_string).utc();
+  const utc = moment(date_string)
+    .utc()
+    .format("ddd, D MMM YYYY hh:m:ss z");
 
   if (!validDateString) {
     return res.status(400).json({ error: "Invalid Date" });

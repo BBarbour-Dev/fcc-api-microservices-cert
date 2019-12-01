@@ -1,5 +1,3 @@
-const moment = require("moment");
-
 module.exports = function(req, res) {
   const { date_string } = req.params;
 
@@ -10,12 +8,12 @@ module.exports = function(req, res) {
     return res.status(200).json({ unix, utc });
   }
 
-  const validDateString = moment(date_string).isValid();
   const date = new Date(date_string);
+  const invalidDate = isNaN(date);
   const unix = date.getTime();
   const utc = date.toUTCString();
 
-  if (!validDateString) {
+  if (invalidDate) {
     return res.status(400).json({ error: "Invalid Date" });
   }
 

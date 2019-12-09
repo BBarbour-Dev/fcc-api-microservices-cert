@@ -1,6 +1,6 @@
 const dns = require("dns");
 const fs = require("fs");
-const shorturls = require("../data/shorturls.json");
+const shorturls = require("../.data/shorturls.json");
 
 module.exports = function(req, res) {
   const { url } = req.body;
@@ -30,7 +30,7 @@ module.exports = function(req, res) {
 
   const updatedJson = JSON.stringify(updatedShorturls);
 
-  return fs.writeFile("data/shorturls.json", updatedJson, err => {
+  return fs.writeFile(".data/shorturls.json", updatedJson, err => {
     if (err) {
       console.error(err);
       return res.send(500);

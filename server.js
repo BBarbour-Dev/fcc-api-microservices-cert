@@ -11,7 +11,6 @@ app.get("/", function(_req, res) {
 });
 
 // Request Handler Functions
-
 const timestamp = require("./handlers/timestamp");
 const headerparser = require("./handlers/headerparser");
 

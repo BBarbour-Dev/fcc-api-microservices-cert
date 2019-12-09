@@ -10,14 +10,13 @@ app.get("/", function(_req, res) {
   res.sendFile(__dirname + "/views/index.html");
 });
 
-// Request Handlers
-const timestamp = require("./timestamp");
-const headerparser = require("./headerparser");
+// Request Handler Functions
+
+const timestamp = require("./handlers/timestamp");
+const headerparser = require("./handlers/headerparser");
 
 app.get("/api/timestamp", (req, res) => timestamp(req, res));
-
 app.get("/api/timestamp/:date_string", (req, res) => timestamp(req, res));
-
 app.get("/api/whoami", (req, res) => headerparser(req, res));
 
 const listener = app.listen(process.env.PORT || 5000, function() {

@@ -18,18 +18,16 @@ app.get("/", function(_req, res) {
   res.sendFile(__dirname + "/views/index.html");
 });
 
-// your first API endpoint...
-app.get("/api/hello", (_req, res) => {
-  res.json({ greeting: "hello API" });
-});
-
+//Handlers
 const timestamp = require("./timestamp");
+const headerparser = require("./headerparser");
 
 app.get("/api/timestamp", (req, res) => timestamp(req, res));
 
 app.get("/api/timestamp/:date_string", (req, res) => timestamp(req, res));
 
-// listen for requests :)
+app.get("/api/whoami", (req, res) => headerparser(req, res));
+
 const listener = app.listen(process.env.PORT || 5000, function() {
   console.log("Your app is listening on port " + listener.address().port);
 });

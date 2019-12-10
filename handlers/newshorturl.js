@@ -1,4 +1,3 @@
-const dns = require("dns");
 const fs = require("fs");
 const shorturls = require("../.data/shorturls.json");
 
@@ -20,7 +19,6 @@ module.exports = function(req, res) {
   }
 
   const newId = `${shorturls.length + 1}a`;
-
   const newShortened = `${req.protocol}://${req.headers.host}/api/shorturl/${newId}`;
 
   const updatedShorturls = [

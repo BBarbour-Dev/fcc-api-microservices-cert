@@ -12,7 +12,7 @@ module.exports = function(req, res) {
 
   if (!validUnix && !validString) {
     console.log(date_string);
-    return res.status(200).json({ error: "Invalid Date" });
+    return res.status(200).json({ error: 'Invalid Date' });
   }
 
   const date = validString

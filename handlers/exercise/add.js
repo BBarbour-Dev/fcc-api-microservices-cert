@@ -1,5 +1,6 @@
 const fs = require('fs');
 const exerciseUsers = require('../../.data/exercise-users.json');
+const exercises = require('../../.data/exercises.json');
 
 module.exports = function(req, res) {
   const validReq = validateReq(req.body);
@@ -28,7 +29,9 @@ module.exports = function(req, res) {
     date = `${year}-${month}-${day}`;
   }
 
-  const updatedJson = JSON.stringify({ userId, description, duration, date });
+  exercises.push({ userId, description, duration, date });
+
+  const updatedJson = JSON.stringify(exercises);
 
   return fs.writeFile('.data/exercises.json', updatedJson, err => {
     if (err) {

@@ -18,7 +18,7 @@ module.exports = function(req, res) {
     return res.status(200).json({ ...user, log, count: log.length });
   }
 
-  // implement limit and from logic
+  // implement limit and from-to logic
 
   return res.status(200).json('ok');
 };

@@ -1,7 +1,7 @@
 /****** Main Styling ******/
 
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-size: 16px;
   color: #222;
   background-color: #fafafa;
@@ -35,7 +35,7 @@ code {
   background-color: #fff;
 }
 ol {
-  list-style-position: outside;
+  list-style-position: inside;
 }
 ul {
   list-style-type: none;

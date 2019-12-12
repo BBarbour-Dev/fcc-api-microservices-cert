@@ -1,5 +1,5 @@
-const fs = require("fs");
-const shorturls = require("../.data/shorturls.json");
+const fs = require('fs');
+const shorturls = require('../.data/shorturls.json');
 
 module.exports = function(req, res) {
   const { url } = req.body;
@@ -7,7 +7,7 @@ module.exports = function(req, res) {
   const urlRegex = new RegExp(expression);
   const validUrl = urlRegex.test(url);
   if (!validUrl) {
-    return res.status(400).json({ error: "invalid URL" });
+    return res.status(400).json({ error: 'invalid URL' });
   }
 
   const getUrl = shorturls.find(storedUrl => storedUrl.original_url === url);
@@ -28,12 +28,12 @@ module.exports = function(req, res) {
 
   const updatedJson = JSON.stringify(updatedShorturls);
 
-  return fs.writeFile(".data/shorturls.json", updatedJson, err => {
+  return fs.writeFile('.data/shorturls.json', updatedJson, err => {
     if (err) {
       console.error(err);
       return res.send(500);
     }
-    console.log("shorturls.json updated");
+    console.log('shorturls.json updated');
     return res.status(200).json({ original_url: url, short_url: newShortened });
   });
 };
